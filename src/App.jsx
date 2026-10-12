@@ -1,5 +1,7 @@
 
 import { useEffect, useMemo, useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 import "./App.css";
 
 const initialLeads = [
@@ -34,7 +36,7 @@ function App() {
     async function fetchLeads() {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/leads"
+          `${API_URL}/api/leads`
         );
 
         if (!response.ok) {
@@ -97,7 +99,7 @@ const filteredLeads = useMemo(() => {
   async function updateStatus(id, nextStatus) {
   try {
     const response = await fetch(
-      `http://localhost:5000/api/leads/${id}`,
+      `${API_URL}/api/leads/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -137,7 +139,7 @@ const leadData = {
   };
 
   try {
-    const response = await fetch("http://localhost:5000/api/leads", {
+    const response = await fetch(`${API_URL}/api/leads`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
